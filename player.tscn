@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://crkfxxch1c226"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+
+[node name="CameraPivot" type="Node3D" parent="."]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_sh265")
