@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://crkfxxch1c226"]
+[gd_scene load_steps=3 format=3 uid="uid://crkfxxch1c226"]
+
+[ext_resource type="Script" uid="uid://ddre7b4co6pyr" path="res://player.gd" id="1_4flbx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
 [node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_4flbx")
 
 [node name="CameraPivot" type="Node3D" parent="."]
 
