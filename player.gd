@@ -29,9 +29,7 @@ func _physics_process(delta: float) -> void:
 
 	#move_and_slide()
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	print(velocity)
-
-	camera_3d.rotate_z(velocity.x)
 
 	move_and_slide()
