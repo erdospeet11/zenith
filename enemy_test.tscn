@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://hdcc0u0ytttr"]
+
+[ext_resource type="Script" uid="uid://dx5mapeg5nwgg" path="res://enemy_test.gd" id="1_tekfo"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tg40w"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tekfo"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+script = ExtResource("1_tekfo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_tg40w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_tekfo")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

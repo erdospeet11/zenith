@@ -1,19 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://7lc0aoxiywvh"]
+[gd_scene load_steps=9 format=3 uid="uid://7lc0aoxiywvh"]
 
 [ext_resource type="Script" uid="uid://d6qrohb0r6op" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="Texture2D" uid="uid://dou6qrlnpa26u" path="res://addons/kenney_prototype_textures/dark/texture_07.png" id="2_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://cjwg067lpowmr" path="res://high_environment.tscn" id="2_1bvp3"]
+[ext_resource type="Material" uid="uid://cx4wf7qrob7d8" path="res://default_material.tres" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://crkfxxch1c226" path="res://player.tscn" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://hdcc0u0ytttr" path="res://enemy_test.tscn" id="5_lquwl"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
-albedo_texture = ExtResource("2_0xm2m")
-uv1_triplanar = true
-uv1_world_triplanar = true
-uv2_triplanar = true
+[sub_resource type="NavigationMesh" id="NavigationMesh_1bvp3"]
+vertices = PackedVector3Array(-39.5, 1, 0, -6, 1, 0, -5.75, 1, -1, -4.75, 1, -39.5, -39.5, 1, -39.5, -4.75, 1, -1, -4, 1, -1, -3.75, 1, 0, 39.5, 1, 0, 39.5, 1, -39.5, -6, 1, 1, -5, 1, 1.25, -39.5, 1, 39.5, -5, 1, 39.5, -4.25, 1, 1.25, 39.5, 1, 39.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 4), PackedInt32Array(2, 4, 3), PackedInt32Array(3, 5, 2), PackedInt32Array(6, 5, 3), PackedInt32Array(6, 3, 7), PackedInt32Array(7, 3, 8), PackedInt32Array(8, 3, 9), PackedInt32Array(0, 1, 10), PackedInt32Array(10, 11, 0), PackedInt32Array(0, 11, 13), PackedInt32Array(0, 13, 12), PackedInt32Array(13, 11, 14), PackedInt32Array(14, 7, 13), PackedInt32Array(13, 7, 8), PackedInt32Array(13, 8, 15)]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1bvp3"]
-material = SubResource("StandardMaterial3D_h2yge")
+material = ExtResource("3_1bvp3")
 size = Vector3(80, 1, 80)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
+size = Vector3(1, 4.83, 1)
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_ig7tw")
@@ -24,9 +26,21 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_1bvp3")]
 
-[node name="MeshInstance3D" type="CSGMesh3D" parent="."]
+[node name="Player" parent="." instance=ExtResource("3_h2yge")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8621709, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_1bvp3")
+
+[node name="MeshInstance3D" type="CSGMesh3D" parent="NavigationRegion3D"]
 use_collision = true
 mesh = SubResource("BoxMesh_1bvp3")
 
-[node name="CharacterBody3D" parent="." instance=ExtResource("3_h2yge")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="CSGMesh3D" type="CSGMesh3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2.5745945, 0)
+mesh = SubResource("BoxMesh_lquwl")
+material = ExtResource("3_1bvp3")
+
+[node name="CharacterBody3D2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_lquwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.807154, 2.003622, 0)
+player = NodePath("../Player")
