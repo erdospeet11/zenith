@@ -4,14 +4,20 @@ extends CharacterBody3D
 @onready var navigation_agent: NavigationAgent3D = get_node("NavigationAgent3D")
 @export var player : CharacterBody3D
 
+var health := 40
+var damage := 5
+
 func _ready() -> void:
 	navigation_agent.velocity_computed.connect(Callable(_on_velocity_computed))
 
 func set_movement_target(movement_target: Vector3):
 	navigation_agent.set_target_position(movement_target)
 
+#TODO: rotate towards target
 func _physics_process(delta):
 	set_movement_target(player.global_position)
+	look_at(player.global_position)
+	
 	
 	# Do not query when the map has never synchronized and is empty.
 	if NavigationServer3D.map_get_iteration_id(navigation_agent.get_navigation_map()) == 0:
