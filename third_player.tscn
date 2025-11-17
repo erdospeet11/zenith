@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dydplttookj1q"]
+
+[ext_resource type="PackedScene" uid="uid://drge1wcjqwduh" path="res://exported-model.glb" id="1_sedoy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8b8sf"]
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_8b8sf")
+
+[node name="exported-model" parent="." instance=ExtResource("1_sedoy")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="Node3D/SpringArm3D"]
